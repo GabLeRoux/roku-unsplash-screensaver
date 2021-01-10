@@ -1,27 +1,29 @@
-'*************************************************************
-'** Hello World example 
-'** Copyright (c) 2015 Roku, Inc.  All rights reserved.
-'** Use of the Roku Platform is subject to the Roku SDK License Agreement:
-'** https://docs.roku.com/doc/developersdk/en-us
-'*************************************************************
+sub RunScreenSaver()
+    screen = createObject("roSGScreen")
+    port = createObject("roMessagePort")
+    port2 =  createObject("roMessagePort")
+    screen.setMessagePort(port)
 
-sub Main()
-    print "in showChannelSGScreen"
-    'Indicate this is a Roku SceneGraph application'
-    screen = CreateObject("roSGScreen")
-    m.port = CreateObject("roMessagePort")
-    screen.setMessagePort(m.port)
+    m.global = screen.getGlobalNode() 'Creates (Global) variable MyField
+    m.global.AddField("MyField", "int", true)
+    m.global.MyField = 0
+    m.global.AddField("PicSwap", "int", true) 'Creates (Global) variable PicSwap
+    m.global.PicSwap = 0
 
-    'Create a scene and load /components/helloworld.xml'
-    scene = screen.CreateScene("HelloWorld")
+    scene = screen.createScene("ScreensaverFade") 'Creates scene ScreensaverFade
     screen.show()
 
-    while(true)
-        msg = wait(0, m.port)
-        msgType = type(msg)
-        if msgType = "roSGScreenEvent"
-            if msg.isScreenClosed() then return
+    while(true) 'Message Port that fires every 7 seconds to change value of MyField if the screen isn't closed
+        msg = wait(7000, port)
+        if (msg <> invalid)
+            msgType = type(msg)
+            if msgType = "roSGScreenEvent"
+                if msg.isScreenClosed() then return
+            end if
+        else
+            m.global.MyField += 10
+            msg = wait(2500, port2) 'Message port that fires 4 seconds after MyField is changed. Must be set to different port than other wait function or it will interfere.
+            m.global.PicSwap += 10
         end if
     end while
 end sub
-
