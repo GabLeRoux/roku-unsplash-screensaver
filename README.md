@@ -12,7 +12,7 @@ Ad-Free Open Source Roku Screensaver showing random images from Unsplash.
 
 1. Follow instructions on [Roku developer program](https://developer.roku.com/en-ca/docs/developer-program/getting-started/roku-dev-prog.md). Make sure you succeed with their hello world example first.
 1. Clone this repository and `cd` into it.
-1. Download `app.mk` from roku's example to project's parent folder
+1. Download [`app.mk` from roku's example](https://github.com/rokudev/samples/blob/master/getting%20started/makefile/app.mk) to project's parent folder
 
     ```bash
     wget https://raw.githubusercontent.com/rokudev/samples/master/getting%20started/makefile/app.mk -O ../app.mk
