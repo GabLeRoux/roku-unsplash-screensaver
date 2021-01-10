@@ -6,6 +6,10 @@ Ad-Free Open Source Roku Screensaver showing random images from Unsplash.
 
 ## How to install
 
+1. To enter dev mode, using your Roku remote, enter the following button sequence:
+
+    🏠 🏠 🏠 + 🔼 🔼 + ▶️ ◀️ + ▶️ ◀️ + ▶️
+
 1. Follow instructions on [Roku developer program](https://developer.roku.com/en-ca/docs/developer-program/getting-started/roku-dev-prog.md). Make sure you succeed with their hello world example first.
 1. Clone this repository and `cd` inside it.
 1. Download `app.mk` from roku's example to project's parent folder
