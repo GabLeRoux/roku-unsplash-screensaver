@@ -1,6 +1,6 @@
 # Roku Unsplash Screensaver
 
-Ad-Free Free Open Source Roku Screensaver showing random images from Unsplash.
+Ad-Free Open Source Roku Screensaver showing random images from Unsplash.
 
 ![Roku Unsplash Screensaver header image](./docs/header.jpg)
 
