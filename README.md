@@ -44,6 +44,10 @@ Contributions are welcome! 🙏
 1. Make sure you read [Roku Screensavers documentation](https://developer.roku.com/en-ca/docs/developer-program/media-playback/screensavers.md) if you intend to modify the code.
 2. Have a look [to the issues](https://github.com/gableroux/roku-unsplash-screensaver/issues), there's some work and open questions in here.
 
+## Disclaimer
+
+This repository is not sponsored by or affiliated with Roku and Unsplash.
+
 ## License
 
 [MIT](LICENSE.md) © [Gabriel Le Breton](https://gableroux.com)
