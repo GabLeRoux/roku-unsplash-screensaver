@@ -2,6 +2,8 @@
 
 Ad-Free Free Open Source Roku Screensaver showing random images from Unsplash.
 
+![Roku Unsplash Screensaver header image](./docs/header.jpg)
+
 ## How to install
 
 1. Follow instructions on [Roku developer program](https://developer.roku.com/en-ca/docs/developer-program/getting-started/roku-dev-prog.md). Make sure you succeed with their hello world example first.
@@ -34,6 +36,13 @@ make install
 ```
 
 :tada:
+
+## Contributing
+
+Contributions are welcome! 🙏
+
+1. Make sure you read [Roku Screensavers documentation](https://developer.roku.com/en-ca/docs/developer-program/media-playback/screensavers.md) if you intend to modify the code.
+2. Have a look [to the issues](https://github.com/gableroux/roku-unsplash-screensaver/issues), there's some work and open questions in here.
 
 ## License
 
