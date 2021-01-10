@@ -1,29 +1,55 @@
-sub RunScreenSaver()
-    screen = createObject("roSGScreen")
-    port = createObject("roMessagePort")
-    port2 =  createObject("roMessagePort")
-    screen.setMessagePort(port)
+sub Main()
+    RunScreenSaver()
+end sub
 
-    m.global = screen.getGlobalNode() 'Creates (Global) variable MyField
-    m.global.AddField("MyField", "int", true)
-    m.global.MyField = 0
-    m.global.AddField("PicSwap", "int", true) 'Creates (Global) variable PicSwap
-    m.global.PicSwap = 0
+Sub RunScreenSaver()
+    print "Starting screensaver"
+    waitDelay = 15000
 
-    scene = screen.createScene("ScreensaverFade") 'Creates scene ScreensaverFade
-    screen.show()
+    di = CreateObject("roDeviceInfo")
+    displayMode = di.GetDisplayMode()
 
-    while(true) 'Message Port that fires every 7 seconds to change value of MyField if the screen isn't closed
-        msg = wait(7000, port)
-        if (msg <> invalid)
-            msgType = type(msg)
-            if msgType = "roSGScreenEvent"
-                if msg.isScreenClosed() then return
+    width = int(di.GetDisplaySize().w)
+    height = int(di.GetDisplaySize().h)
+    xpos = 0
+    ypos = 0
+
+    randomImageUrl = "https://source.unsplash.com/" + width.toStr() + "x" + height.toStr() + "/?nature,water,pets,cats,landscape,space,landscape,sunset"
+
+    canvas = CreateObject("roImageCanvas")
+    port = CreateObject("roMessagePort")
+    canvas.SetMessagePort(port)
+    canvas.SetLayer(0, {Color:"#FF000000", CompositionMode:"Source"})
+    canvas.SetRequireAllImagesToDraw(false)
+
+    while(true)
+        ' randomize url so device doesn't think we're requesting always the same url everytime
+        newImageUrl = randomImageUrl + "#" + Rnd(65534).toStr()
+
+        canvasItems = [
+            {
+                url: newImageUrl
+                TargetRect:{x:xpos,y:ypos,w:width,h:height}
+            }
+        ]
+        canvas.SetLayer(1, canvasItems)
+        canvas.Show()
+
+        msg = wait(waitDelay, port)
+        if type(msg) = "roImageCanvasEvent" then
+            if (msg.isRemoteKeyPressed()) then
+                return
             end if
-        else
-            m.global.MyField += 10
-            msg = wait(2500, port2) 'Message port that fires 4 seconds after MyField is changed. Must be set to different port than other wait function or it will interfere.
-            m.global.PicSwap += 10
         end if
     end while
-end sub
+End Sub
+
+'Function fetch_JSON(url as string) as Object
+'    print "fetch_JSON"
+'    print url
+'    xfer=createobject("roURLTransfer")
+'    xfer.seturl(url)
+'    data=xfer.gettostring()
+'    json = ParseJSON(data)
+'    return json
+'End Function
