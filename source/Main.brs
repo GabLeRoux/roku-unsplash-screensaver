@@ -14,7 +14,25 @@ Sub RunScreenSaver()
     xpos = 0
     ypos = 0
 
-    randomImageUrl = "https://source.unsplash.com/" + width.toStr() + "x" + height.toStr() + "/?nature,water,pets,cats,landscape,space,landscape,sunset"
+    ' This is a workaround to reduce occurences of following issue: https://github.com/GabLeRoux/roku-unsplash-screensaver/issues/3
+    keywords = [
+        "cats",
+        "water",
+        "space",
+        "landscape"
+        "cats,water",
+        "landscape,space",
+        "nature",
+        "cats,nature",
+        "wallpaper",
+        "yoga",
+        "sunrise",
+        "forest",
+        "coffee",
+        "sky",
+    ]
+    number_of_keywords = 14 ' that's only because I don't know how to len(keywords), gotta learn Birghtscript
+    randomImageUrl = "https://source.unsplash.com/" + width.toStr() + "x" + height.toStr() + "/"
 
     canvas = CreateObject("roImageCanvas")
     port = CreateObject("roMessagePort")
@@ -23,8 +41,11 @@ Sub RunScreenSaver()
     canvas.SetRequireAllImagesToDraw(false)
 
     while(true)
+        keywords_params = keywords[Rnd(number_of_keywords) - 1]
         ' randomize url so device doesn't think we're requesting always the same url everytime
-        newImageUrl = randomImageUrl + "#" + Rnd(65534).toStr()
+        newImageUrl = randomImageUrl + "?" + keywords_params + "#" + Rnd(1000).toStr()
+
+        print newImageUrl
 
         canvasItems = [
             {
