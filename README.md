@@ -18,8 +18,6 @@ Ad-Free Open Source Roku Screensaver showing random images from Unsplash.
     wget https://raw.githubusercontent.com/rokudev/samples/master/getting%20started/makefile/app.mk -O ../app.mk
     ```
 
-    _if you're on MacOS and you get 'ERROR: Device is not responding to ping.', refer to [rokudev/samples#28](https://github.com/rokudev/samples/issues/28)_.
-
 1. Copy and fill environment variables
 
     ```bash
@@ -40,6 +38,8 @@ Ad-Free Open Source Roku Screensaver showing random images from Unsplash.
     ```bash
     make install
     ```
+
+    _if you're on MacOS and you get 'ERROR: Device is not responding to ping.', refer to [rokudev/samples#28](https://github.com/rokudev/samples/issues/28)_.
 
 :tada:
 
