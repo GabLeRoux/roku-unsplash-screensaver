@@ -31,7 +31,7 @@ Ad-Free Open Source Roku Screensaver showing random images from Unsplash.
     export $(cat .env | xargs)
     ```
     
-    Note: The above command is the equivalent of running `export WHATHEVER=something` in your shell for each line in the `.env`, you could also `export` them by hand if you prefer.
+    _Note: The above command is the equivalent of running `export WHATHEVER=something` in your shell for each line in the `.env`, you could also `export` them by hand if you prefer, but using the above command will prevent you from writing secrets in your shell history 🙈._
 
 1. Deploy to your device
 
