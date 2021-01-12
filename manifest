@@ -5,7 +5,7 @@ major_version=1
 minor_version=0
 build_version=0
 
-ui_resolutions=hd
+ui_resolutions=fhd,hd,sd
 
 ##   Channel Assets
 ###  Main Menu Icons / Channel Poster Artwork
