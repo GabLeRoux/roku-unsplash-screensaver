@@ -9,37 +9,38 @@ sub Main()
     screen.setMessagePort(port)
 
     m.global = screen.getGlobalNode() 'Creates (Global) variable MyField
-    m.global.AddField("MyField", "int", true)
-    m.global.MyField = 0
+    m.global.AddField("newImageUrl", "string", true) 'Creates (Global) variable newImageUrl
+    m.global.newImageUrl = GetImageUrl()
     m.global.AddField("PicSwap", "int", true) 'Creates (Global) variable PicSwap
     m.global.PicSwap = 0
-    m.global.AddField("newImageUrl", "string", true) 'Creates (Global) variable newImageUrl
-    m.global.newImageUrl = ""
 
     scene = screen.createScene("ScreensaverFade") 'Creates scene ScreensaverFade
     screen.show()
 
+    delayPerPicture = 7000
+    delayBeforeFading = 2500
+
+    ' trigger first picture swap
+    m.global.PicSwap += 1
+
     while(true) 'Message Port that fires every 7 seconds to change value of MyField if the screen isn't closed
-        msg = wait(7000, port)
+        msg = wait(delayPerPicture, port)
         if (msg <> invalid)
             msgType = type(msg)
             if msgType = "roSGScreenEvent"
                 if msg.isScreenClosed() then return
             end if
         else
-            m.global.MyField += 10
-            downloadImage()
-            msg = wait(2500, port2) 'Message port that fires 4 seconds after MyField is changed. Must be set to different port than other wait function or it will interfere.
-            m.global.PicSwap += 10
+            ' TODO: store to tmp:/ or something like that
+            m.global.newImageUrl = GetImageUrl()
+            msg = wait(delayBeforeFading, port2)
+            m.global.PicSwap += 1
         end if
     end while
 end sub
 
-Function downloadImage()
-    print "downloadImage"
-
-    '    width = 3840
-    '    height = 2160
+Function GetImageUrl()
+    print "GetImageUrl"
 
     di = CreateObject("roDeviceInfo")
     displayMode = di.GetDisplayMode()
@@ -76,15 +77,5 @@ Function downloadImage()
     ' randomize url so device doesn't think we're requesting always the same url everytime
     newImageUrl = randomImageUrl + "?" + keywords_params + "#" + Rnd(1000).toStr()
     print newImageUrl
-    m.global.newImageUrl = newImageUrl
+    return newImageUrl
 End Function
-
-'Function fetch_JSON(url as string) as Object
-'    print "fetch_JSON"
-'    print url
-'    xfer=createobject("roURLTransfer")
-'    xfer.seturl(url)
-'    data=xfer.gettostring()
-'    json = ParseJSON(data)
-'    return json
-'End Function

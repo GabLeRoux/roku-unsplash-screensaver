@@ -9,10 +9,8 @@ End Function
 Function init()
     m.FadeAnimation = m.top.findNode("FadeAnimation") 'Sets pointer to FadeAnimation node
     m.BackgroundArt = m.top.findNode("BackgroundArt") 'Sets pointer to BackgroundArt node
-'    m.BackgroundArt.uri = m.pictures[0] 'Sets Background art to first picture
 
     m.global.observeField("PicSwap", "changeBackground") 'field Observer that calls changeBackground() function everytime the value of PicSwap is changed
-    m.global.observeField("MyField", "FadeAnimation")  'field Observer that calls FadeAnimation() function everytime the value of MyField is changed
     m.global.observeField("newImageUrl", "FadeAnimation")  'field Observer that calls FadeAnimation() function everytime the value of MyField is changed
 End Function
 
